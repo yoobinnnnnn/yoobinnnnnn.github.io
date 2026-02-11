@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- 기본 메타태그 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO 메타태그 -->
+    <title>HOT6 - 청춘은 바로 지금, 불가능은 없다</title>
+    <meta name="description" content="청춘은 바로 지금, 불가능은 없다">
+    <meta name="keywords" content="HOT6, 자기주도성, 전문성, 도전정신, 상명대">
+    
+    <!-- Open Graph 메타태그 -->
+    <meta property="og:title" content="HOT6">
+    <meta property="og:description" content="청춘은 바로 지금, 불가능은 없다">
+    <meta property="og:image" content="단체.jpeg">
+    <meta property="og:type" content="website">
+    
+    <style>
+        /* ===== 기본 스타일 리셋 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* 비비드 컬러풀 색상 팔레트 */
+            --color-pink: #FF6B9D;
+            --color-purple: #C879FF;
+            --color-blue: #4D96FF;
+            --color-yellow: #FFD93D;
+            --color-dark: #1a1a2e;
+            --color-light: #ffffff;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: var(--color-dark);
+            color: var(--color-light);
+        }
+        
+        /* ===== 분할 스크린 레이아웃 ===== */
+        .split-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* 좌측 고정 영역 */
+        .left-panel {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 50%;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-blue));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            z-index: 10;
+        }
+        
+        .team-logo {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--color-light);
+            margin-bottom: 1rem;
+            text-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+            animation: bounceIn 1s ease-out;
+        }
+        
+        .team-slogan {
+            font-size: 1.5rem;
+            color: var(--color-light);
+            text-align: center;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+        
+        .team-photo {
+            width: 80%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+            transition: transform 0.3s ease;
+        }
+        
+        .team-photo:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+        
+        /* 우측 스크롤 영역 */
+        .right-panel {
+            margin-left: 50%;
+            width: 50%;
+            background: var(--color-dark);
+        }
+        
+        /* ===== 섹션 공통 스타일 ===== */
+        section {
+            padding: 5rem 3rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--color-pink), var(--color-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* ===== Team Values 스타일 ===== */
+        .values-grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .value-card {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(200, 121, 255, 0.1));
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .value-card:nth-child(1) {
+            border-color: var(--color-pink);
+        }
+        
+        .value-card:nth-child(2) {
+            border-color: var(--color-purple);
+        }
+        
+        .value-card:nth-child(3) {
+            border-color: var(--color-blue);
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 107, 157, 0.3);
+            animation: playfulBounce 0.6s ease;
+        }
+        
+        .value-number {
+            font-size: 3rem;
+            font-weight: 900;
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+        
+        .value-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-light);
+        }
+        
+        .value-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        /* ===== Team Members 스타일 ===== */
+        #members {
+            background: linear-gradient(180deg, var(--color-dark) 0%, #2a2a4e 100%);
+        }
+        
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .member-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--color-yellow);
+            animation: playfulBounce 0.6s ease;
+        }
+        
+        .member-photo-container {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--color-pink), var(--color-purple));
+        }
+        
+        .member-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .member-card:hover .member-photo {
+            transform: scale(1.1);
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        .member-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-yellow);
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-description {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+        
+        /* ===== Guestbook 스타일 ===== */
+        #guestbook {
+            background: var(--color-dark);
+        }
+        
+        .guestbook-container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid var(--color-blue);
+        }
+        
+        /* ===== Footer 스타일 ===== */
+        footer {
+            background: #0f0f1e;
+            padding: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            border-top: 2px solid var(--color-pink);
+        }
+        
+        footer a {
+            color: var(--color-yellow);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        footer a:hover {
+            color: var(--color-pink);
+            animation: playfulBounce 0.6s ease;
+        }
+        
+        /* ===== 애니메이션 키프레임 ===== */
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateY(-50px);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes playfulBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            25% {
+                transform: translateY(-10px);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+            75% {
+                transform: translateY(-8px);
+            }
+        }
+        
+        /* ===== 반응형 디자인 ===== */
+        @media (max-width: 1024px) {
+            .split-container {
+                flex-direction: column;
+            }
+            
+            .left-panel {
+                position: relative;
+                width: 100%;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .right-panel {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            section {
+                padding: 3rem 2rem;
+                min-height: auto;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .team-logo {
+                font-size: 3.5rem;
+            }
+            
+            .team-slogan {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .team-logo {
+                font-size: 2.5rem;
+            }
+            
+            .team-slogan {
+                font-size: 1rem;
+            }
+            
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .value-card {
+                padding: 1.5rem;
+            }
+            
+            .value-title {
+                font-size: 1.5rem;
+            }
+            
+            section {
+                padding: 2rem 1.5rem;
+            }
+        }
+        
+        /* ===== 스크롤바 스타일 ===== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--color-dark);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--color-pink), var(--color-purple));
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--color-purple), var(--color-blue));
+        }
+    </style>
+</head>
+<body>
+    <!-- 분할 스크린 컨테이너 -->
+    <div class="split-container">
+        <!-- 좌측 고정 패널 - 히어로 섹션 -->
+        <div class="left-panel">
+            <h1 class="team-logo">HOT6</h1>
+            <p class="team-slogan">청춘은 바로 지금, 불가능은 없다</p>
+            <img src="단체.jpeg" alt="HOT6 팀 사진" class="team-photo">
+        </div>
+        
+        <!-- 우측 스크롤 패널 -->
+        <div class="right-panel">
+            <!-- Team Values 섹션 -->
+            <section id="values">
+                <h2 class="section-title">Team Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-number">01</div>
+                        <h3 class="value-title">자기주도성</h3>
+                        <p class="value-description">누가 시켜서가 아닌 스스로 목표 수립하기</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-number">02</div>
+                        <h3 class="value-title">전문성</h3>
+                        <p class="value-description">자격증, 포트폴리오, 연구 경험 쌓기</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-number">03</div>
+                        <h3 class="value-title">도전정신</h3>
+                        <p class="value-description">교환학생, 인턴, 대외활동 등 해보지 않은 경험 해보기</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Team Members 섹션 -->
+            <section id="members">
+                <h2 class="section-title">Team Members</h2>
+                <div class="members-grid">
+                    <!-- 팀원 1 -->
+                    <div class="member-card">
+                        <div class="member-photo-container">
+                            <img src="member1.jpeg" alt="김태주" class="member-photo">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">김태주</h3>
+                            <p class="member-description">국가안보학과 / 상명대에서 많은 걸 경험하겠습니다</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 팀원 2 -->
+                    <div class="member-card">
+                        <div class="member-photo-container">
+                            <img src="member2.jpeg" alt="이현욱" class="member-photo">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">이현욱</h3>
+                            <p class="member-description">국가안보학과 / 상명대에서 많은 경험을 해보고 싶은 학생입니다</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 팀원 3 -->
+                    <div class="member-card">
+                        <div class="member-photo-container">
+                            <img src="member3.jpeg" alt="이서영" class="member-photo">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">이서영</h3>
+                            <p class="member-description">공간환경학부 / 항상 도전하고 배우는 자세로!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 팀원 4 -->
+                    <div class="member-card">
+                        <div class="member-photo-container">
+                            <img src="member4.jpeg" alt="황소윤" class="member-photo">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">황소윤</h3>
+                            <p class="member-description">잘 먹고 잘 웃고 잘함</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 팀원 5 -->
+                    <div class="member-card">
+                        <div class="member-photo-container">
+                            <img src="member5.jpeg" alt="강은별" class="member-photo">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">강은별</h3>
+                            <p class="member-description">지적재산권전공 / 무엇이든 열심히 하려고 노력하겠습니다</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 팀원 6 -->
+                    <div class="member-card">
+                        <div class="member-photo-container">
+                            <img src="member6.jpeg" alt="이은비" class="member-photo">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">이은비</h3>
+                            <p class="member-description">지적재산권전공 / 매순간에 최선을 다하며 노력합니다</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 팀원 7 -->
+                    <div class="member-card">
+                        <div class="member-photo-container">
+                            <img src="member7.jpeg" alt="고산" class="member-photo">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">고산</h3>
+                            <p class="member-description">국가안보학과 / 상명대에서 많이 배우겠습니다</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 팀원 8 -->
+                    <div class="member-card">
+                        <div class="member-photo-container">
+                            <img src="member8.jpeg" alt="강유빈" class="member-photo">
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">강유빈</h3>
+                            <p class="member-description">공간환경학부 / 여러분 오늘 하루동안 잘 부탁드려요 공환 최고 ㅎㅎ</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Guestbook 섹션 -->
+            <section id="guestbook">
+                <h2 class="section-title">Guestbook</h2>
+                <div class="guestbook-container">
+                    <!-- Utterances 방명록 스크립트 -->
+                    <script src="https://utteranc.es/client.js"
+                            repo="aitrizkr/aiws_sm2026"
+                            issue-term="pathname"
+                            label="방명록"
+                            theme="github-dark"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+                </div>
+            </section>
+            
+            <!-- Footer -->
+            <footer>
+                <p>© 2026 HOT6. Powered by <a href="https://ai.triz.kr" target="_blank">AI Portfolio Workshop</a>.</p>
+            </footer>
+        </div>
+    </div>
+    
+    <!-- JavaScript - 플레이풀 바운스 인터랙션 -->
+    <script>
+        // 스크롤 애니메이션 효과
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // 모든 카드 요소에 스크롤 애니메이션 적용
+        document.querySelectorAll('.value-card, .member-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 0.6s ease-out';
+            observer.observe(card);
+        });
+        
+        // 플레이풀 바운스 효과 - 클릭 이벤트
+        document.querySelectorAll('.value-card, .member-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = 'playfulBounce 0.6s ease';
+                }, 10);
+            });
+        });
+        
+        // 팀 사진 로딩 에러 처리
+        const teamPhoto = document.querySelector('.team-photo');
+        teamPhoto.addEventListener('error', function() {
+            this.src = 'https://via.placeholder.com/500x300/C879FF/FFFFFF?text=HOT6+Team';
+        });
+        
+        // 팀원 사진 로딩 에러 처리
+        document.querySelectorAll('.member-photo').forEach(photo => {
+            photo.addEventListener('error', function() {
+                this.src = 'https://via.placeholder.com/300x300/FF6B9D/FFFFFF?text=HOT6';
+            });
+        });
+        
+        // 부드러운 스크롤 효과
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
